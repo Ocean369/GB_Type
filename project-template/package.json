@@ -1,0 +1,25 @@
+{
+  "name": "project-template",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "rm -rf public/scripts && tsc",
+    "build:dev": "rm -rf public/scripts && tsc -p tsconfig-dev.json",
+    "start": "http-server -p 3000",
+    "lint": "eslint src --ext .js --ext .ts",
+    "lint-fix": "eslint src --ext .js --ext .ts --fix"
+  },
+  "keywords": [],
+  "author": "calibr <awcalibr@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.5",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "eslint": "^8.36.0",
+    "http-server": "^14.1.1",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "moment": "^2.29.4"
+  }
+}
