@@ -2,8 +2,8 @@
   "name": "first_project",
   "version": "1.0.0",
   "scripts": {
-    "build": "rm -rf public/scripts && tsc",
-    "build:dev": "rm -rf public/scripts && tsc -p tsconfig-dev.json && start",
+    "build": "rm -rf public/scripts && npx tsc",
+    "build:dev": "rm -rf public/scripts && npx tsc -p tsconfig-dev.json && start",
     "start": "http-server -p 3000",
     "lint": "eslint src --ext .js --ext .ts",
     "lint-fix": "eslint src --ext .js --ext .ts --fix"

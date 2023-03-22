@@ -1,28 +1,31 @@
 import { Book } from './book.js'
-import { books } from './book-collection.js'
+import { showRating, showCart } from './helpers.js'
+import { Product } from './product.js'
+import { Review } from './types.js'
+import { Genre } from './types.js'
+import { getGenreName } from './helpers.js'
 
-/**
- * 
- * @param genre 
- * @param pagesLimit 
- * @param multipleRecommendations 
- * @returns 
- */
-function findSuitableBook(genre: string, pagesLimit: number, multipleRecommendations = true): Book | Book[] {
-    const findAlgorithm = (book: Book) => {
-        return book.genre === genre && book.pageAmount <= pagesLimit
-    }
-    if (multipleRecommendations) {
-        return books.filter(findAlgorithm)
-    } else {
-        return books.find(findAlgorithm)
-    }
+
+
+
+const reviews: Review[] = [
+  ['John', 5, 'It is my favorite book'],
+  ['Mary', 3, 'I expected more from it :('],
+  ['Clara', 5, 'Read it again and again!']
+]
+
+const book = new Book(
+  'Harry Potter',
+  Genre.Fantasy, 980,
+  { firstName: 'J. K.', lastName: 'Rowling', rating: 4.6 },
+  reviews
+)
+
+const notepad: Product = {
+  price: 40,
+  getProductDescription: () => {
+    return 'Notepad with Unicorn, 50 pages'
+  }
 }
-
-const recommendedBook = findSuitableBook('fantasy', 1000)
-
-if (recommendedBook instanceof Book) {
-    console.log(recommendedBook.name)
-} else {
-    console.log(recommendedBook[0].name)
-}
+showCart([book, notepad])
+console.log(getGenreName(book.genre))
