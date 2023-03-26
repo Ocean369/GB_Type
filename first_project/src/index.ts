@@ -5,7 +5,10 @@ import { Review } from './types.js'
 import { Genre } from './types.js'
 import { getGenreName } from './helpers.js'
 
-
+import { getFromShelf, programmingLiterature } from './book-collection.js'
+console.log(
+  getFromShelf(programmingLiterature, 'Cracking the coding interview')
+)
 
 
 const reviews: Review[] = [

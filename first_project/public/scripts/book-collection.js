@@ -1,8 +1,21 @@
 import { Book } from './book.js';
-export const books = [
-    new Book('Harry Potter and the Philosopher\'s Stone”', 'fantasy', 980),
-    new Book('Lord of the Ring', 'fantasy', 1001),
-    new Book('How to be productive', 'lifestyle', 500),
-    new Book('Game of Thrones', 'fantasy', 999)
+import { Genre } from './types.js';
+// полка с литературой по программированию
+export const programmingLiterature = [
+    new Book('Cracking the coding interview', Genre.Programming, 100, {
+        firstName: 'Gayle',
+        lastName: 'Laakmann',
+        rating: 5
+    })
 ];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYm9vay1jb2xsZWN0aW9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL2Jvb2stY29sbGVjdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsSUFBSSxFQUFFLE1BQU0sV0FBVyxDQUFBO0FBQ2hDLE1BQU0sQ0FBQyxNQUFNLEtBQUssR0FBRztJQUNuQixJQUFJLElBQUksQ0FBQyw0Q0FBNEMsRUFBRSxTQUFTLEVBQUUsR0FBRyxDQUFDO0lBQ3RFLElBQUksSUFBSSxDQUFDLGtCQUFrQixFQUFFLFNBQVMsRUFBRSxJQUFJLENBQUM7SUFDN0MsSUFBSSxJQUFJLENBQUMsc0JBQXNCLEVBQUUsV0FBVyxFQUFFLEdBQUcsQ0FBQztJQUNsRCxJQUFJLElBQUksQ0FBQyxpQkFBaUIsRUFBRSxTQUFTLEVBQUUsR0FBRyxDQUFDO0NBQzVDLENBQUEiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBCb29rIH0gZnJvbSAnLi9ib29rLmpzJ1xuZXhwb3J0IGNvbnN0IGJvb2tzID0gW1xuICBuZXcgQm9vaygnSGFycnkgUG90dGVyIGFuZCB0aGUgUGhpbG9zb3BoZXJcXCdzIFN0b25l4oCdJywgJ2ZhbnRhc3knLCA5ODApLFxuICBuZXcgQm9vaygnTG9yZCBvZiB0aGUgUmluZycsICdmYW50YXN5JywgMTAwMSksXG4gIG5ldyBCb29rKCdIb3cgdG8gYmUgcHJvZHVjdGl2ZScsICdsaWZlc3R5bGUnLCA1MDApLFxuICBuZXcgQm9vaygnR2FtZSBvZiBUaHJvbmVzJywgJ2ZhbnRhc3knLCA5OTkpXG5dIl19
+// функция "взятия" книги с полки
+// по факту это поиск - операция, требующая время
+export function getFromShelf(shelf, bookName) {
+    const book = shelf.find((item) => {
+        return item.name === bookName;
+    });
+    if (book == null) {
+        throw Error(`There is no such book on the shelf.`);
+    }
+    return book;
+}
