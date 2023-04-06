@@ -1,8 +1,9 @@
 
-import { FlatRentSdk } from './flat-rent-sdk.js';
+import { Flat } from './bookingFlat/domain/flat.js';
+// import { FlatRentSdk } from './flat-rent-sdk.js';
 import { renderBlock } from './lib.js'
-import { getFavoriteItems } from './readKeysFromLocalStorage.js'
-import { Database, DatabaseSearch, Place } from './types.js'
+import { getFavoriteItems } from './utility/readKeysFromLocalStorage.js'
+import { Place } from './types.js'
 
 function isPlace(object: any): object is Place {
   return 'fooProperty' in object;
@@ -32,57 +33,33 @@ export function renderEmptyOrErrorSearchBlock(reasonMessage: string) {
   )
 }
 
-export async function renderPlaces(places: Place[] | DatabaseSearch[], provider: string, days: number): Promise<string | null> {
+export function renderPlaces(places: Flat[]): string {
 
   const favoritesAmount = getFavoriteItems();
 
   let placeFindBlocks = '';
-  let id: number;
-  let images: string;
-  let details: string;
-  let name: string;
-  let remoteness: number;
-  let isFavorite: boolean;
-  let price: number;
 
-  places.forEach(async place => {
-    id = place.id;
-    isFavorite = favoritesAmount ? Boolean(favoritesAmount[id]) : false;
-
-    if (provider === 'homy') {
-      // place as Place;
-      images = place.image;
-      details = place.description;
-      name = place.name;
-      remoteness = place.remoteness;
-      price = place.price;
-    } else {
-      // place as Database;
-      images = place.photos[0];
-      details = place.details;
-      name = place.title;
-      remoteness = 0;
-      price = place.totalPrice / days;
-    }
+  places.forEach(place => {
+    const isFavorite = favoritesAmount ? Boolean(favoritesAmount[place.id]) : false;
 
     placeFindBlocks += `
     <li class="result">
         <div class="result-container">
           <div class="result-img-container">
-            <div class="favorites${isFavorite ? ' active' : ''}" id='${id}'>
+            <div class="favorites${isFavorite ? ' active' : ''}" id='${place.id}'>
             </div>
-            <img class="result-img" src='${images}' alt="${name}">
+            <img class="result-img" src='${place.image}' alt="${place.name}">
           </div>	
           <div class="result-info">
             <div class="result-info--header">
-              <p>${name}</p>
-              <p class="price">${price}&#8381;</p>
+              <p>${place.name}</p>
+              <p class="price">${place.price}&#8381;</p>
             </div>
-            <div class="result-info--map"><i class="map-icon"></i> ${remoteness}км от вас</div>
-            <div class="result-info--descr">${details}</div>
+            <div class="result-info--map"><i class="map-icon"></i> ${place.remoteness}км от вас</div>
+            <div class="result-info--descr">${place.description}</div>
             <div class="result-info--footer">
               <div>
-                <button data-id='${id}' data-name='${name}' data-provider='${provider}'>Забронировать</button>
+                <button data-id='${place.originalId}' data-name='${place.name}' data-provider='${place.isProvidedBy('sdk') ? 'sdk' : 'homy'}'>Забронировать</button>
               </div>
             </div>
           </div>
@@ -90,7 +67,7 @@ export async function renderPlaces(places: Place[] | DatabaseSearch[], provider:
       </li>
     `
   })
-  return Promise.resolve(placeFindBlocks)
+  return placeFindBlocks
 }
 
 export function renderSearchResultsBlock(renderPlaces) {
@@ -102,14 +79,14 @@ export function renderSearchResultsBlock(renderPlaces) {
         <p>Результаты поиска</p>
         <div class="search-results-filter">
             <span><i class="icon icon-filter"></i> Сортировать:</span>
-            <select>
-                <option selected="">Сначала дешёвые</option>
-                <option selected="">Сначала дорогие</option>
-                <option>Сначала ближе</option>
+            <select name='sorting' id='sorting'>
+                <option value='cheap' selected >Сначала дешёвые</option>
+                <option value='expensive'>Сначала дорогие</option>
+                <option value='nearer'>Сначала ближе</option>
             </select>
         </div>
     </div>
-    <ul class="results-list">
+    <ul class="results-list" id='results-list'>
       ${renderPlaces}
     </ul>
     `

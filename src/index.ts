@@ -1,12 +1,9 @@
 import { renderSearchFormBlock } from './search-form.js'
 import { renderSearchStubBlock } from './search-results.js'
 import { renderUserBlock } from './user.js'
-import { createLocalStorage } from './createLocalStorage.js'
-import { getUserData } from './readKeysFromLocalStorage.js'
-import { handleSearchFormSubmit } from './handlers.js'
-
-
-
+import { createLocalStorage } from './utility/createLocalStorage.js'
+import { getUserData } from './utility/readKeysFromLocalStorage.js'
+import { handleSearchFormSubmit } from './utility/handlers.js'
 
 
 window.addEventListener('DOMContentLoaded', () => {

@@ -41,7 +41,7 @@ export function renderSearchFormBlock(checkin?: Date, checkout?: Date) {
           </div>
           <div class="providers">
             <label><input type="checkbox" name="provider" value="homy" checked /> Homy</label>
-            <label><input type="checkbox" name="provider" value="flat-rent" checked /> FlatRent</label>
+            <label><input type="checkbox" name="provider" value="sdk" checked /> FlatRent</label>
           </div>
         </div>
         <div class="row" id='searchFormDate'>

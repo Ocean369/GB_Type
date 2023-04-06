@@ -24,5 +24,13 @@
     "moment": "^2.29.4"
   },
   "description": "master",
-  "main": "index.js"
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ocean369/GB_Type.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ocean369/GB_Type/issues"
+  },
+  "homepage": "https://github.com/Ocean369/GB_Type#readme"
 }

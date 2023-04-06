@@ -3,27 +3,37 @@ export function addDays(date: Date, days: number): Date
 export const backendPort: number
 export const localStorageKey: string
 
-interface Database {
+export interface Place {
   id: string,
   title: string,
   details: string,
   photos: string[],
   coordinates: number[],
-  bookedDates: Date[],
+  bookedDates: number[],
   price: number
 }
 
-interface DatabaseSearch {
+export interface PlaceForSearch {
   id: string,
   title: string,
   details: string,
   photos: string[],
   coordinates: number[],
-  bookedDates: Date[],
+  bookedDates: number[],
   totalPrice: number
 }
 
-interface Parameters {
+interface PlaceListResponse {
+  errorMessage?: string
+  items: PlaceForSearch[]
+}
+
+interface PlaceResponce {
+  errorMessage?: string
+  item: Place
+}
+
+interface SearchFilter {
   city: string;
   checkInDate: Date;
   checkOutDate: Date;
@@ -31,8 +41,8 @@ interface Parameters {
 }
 
 export class FlatRentSdk {
-  database: Database[];
-  get(id: string): Promise<Database | null>;
-  search(parametrs: Parameters): Promise<DatabaseSearch[]>;
-  book(flatId: string, checkInDate: Date, checkOutDate: Date): Promise<number | null>
+  database: Place[];
+  get(id: string): Promise<Place>;
+  search(parametrs: SearchFilter): Promise<PlaceForSearch[]>;
+  book(flatId: string, checkInDate: Date, checkOutDate: Date): Promise<number>
 }
