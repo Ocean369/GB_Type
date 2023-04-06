@@ -1,5 +1,5 @@
 import { renderBlock } from './lib.js'
-import { getFavoriteItems, getUserData } from './readKeysFromLocalStorage.js';
+import { getFavoriteItems, getUserData } from './utility/readKeysFromLocalStorage.js';
 
 
 export function renderUserBlock(username?: string, url?: string) {

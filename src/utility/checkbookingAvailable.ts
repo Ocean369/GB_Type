@@ -1,5 +1,5 @@
-import { renderSearchStubBlock } from "./search-results.js";
-import { renderToast } from "./lib.js";
+import { renderSearchStubBlock } from "../search-results.js";
+import { renderToast } from "../lib.js";
 
 export function checkBookingAvailability(selectedDate: Date) {
 

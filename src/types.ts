@@ -9,13 +9,13 @@ export interface Keys {
 }
 
 
-export interface SearchFormData {
-  city: string,
-  providers: string[],
-  checkin: Date,
-  checkout: Date,
-  maxPrice: number
-}
+// export interface SearchFormData {
+//   city: string,
+//   providers: string[],
+//   checkin: Date,
+//   checkout: Date,
+//   maxPrice: number
+// }
 
 export interface Place {
   id: number;
@@ -27,40 +27,40 @@ export interface Place {
   price: number;
 }
 
-export interface Database {
-  id: string,
-  title: string,
-  details: string,
-  photos: string[],
-  coordinates: number[],
-  bookedDates: Date[],
-  price: number
-}
+// export interface Database {
+//   id: string,
+//   title: string,
+//   details: string,
+//   photos: string[],
+//   coordinates: number[],
+//   bookedDates: Date[],
+//   price: number
+// }
 
-export interface DatabaseSearch {
-  id: string,
-  title: string,
-  details: string,
-  photos: string[],
-  coordinates: number[],
-  bookedDates: Date[],
-  totalPrice: number
-}
+// export interface DatabaseSearch {
+//   id: string,
+//   title: string,
+//   details: string,
+//   photos: string[],
+//   coordinates: number[],
+//   bookedDates: Date[],
+//   totalPrice: number
+// }
 
 export interface Property {
-  id: number;
+  id: string;
   name: string;
   image: string;
 }
 
-interface SearchCallback {
-  (error?: Error, placeForm?: Place[])
-}
+// interface SearchCallback {
+//   (error?: Error, placeForm?: Place[])
+// }
 
-export const searchCallback: SearchCallback = (error, places) => {
-  if (error == null && places != null) {
-    console.log('Success!', [])
-  } else {
-    console.error('Fail', error)
-  }
-}
+// export const searchCallback: SearchCallback = (error, places) => {
+//   if (error == null && places != null) {
+//     console.log('Success!', [])
+//   } else {
+//     console.error('Fail', error)
+//   }
+// }
