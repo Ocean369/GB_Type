@@ -25,8 +25,8 @@ function getDateForInput(date: Date | string, shiftByDays?: number | 'lastDay',
 export function renderSearchFormBlock(checkin?: Date, checkout?: Date) {
   const max = getDateForInput(new Date(), 'lastDay', 2);
   const min = getDateForInput(new Date());
-  let dayStart = checkin ? getDateForInput(checkin) : getDateForInput(new Date(), 1);
-  let dayFinish = checkout ? getDateForInput(checkout) : getDateForInput(dayStart, 2);
+  const dayStart = checkin ? getDateForInput(checkin) : getDateForInput(new Date(), 1);
+  const dayFinish = checkout ? getDateForInput(checkout) : getDateForInput(dayStart, 2);
 
   renderBlock(
     'search-form-block',

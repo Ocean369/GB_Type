@@ -1,5 +1,5 @@
-import { renderSearchStubBlock } from "../search-results.js";
-import { renderToast } from "../lib.js";
+import { renderSearchStubBlock } from '../search-results.js';
+import { renderToast } from '../lib.js';
 
 export function checkBookingAvailability(selectedDate: Date) {
 
@@ -12,8 +12,9 @@ export function checkBookingAvailability(selectedDate: Date) {
       clearInterval(interval);
     }
     document.addEventListener('click', (event) => {
-      if (event.target instanceof HTMLButtonElement && event.target.dataset.id) {
-        clearInterval(interval);
+      if (event.target instanceof HTMLButtonElement) {
+        const btn = event.target as HTMLButtonElement
+        if (btn.dataset['id']) clearInterval(interval);
       }
     })
   }, 1000);

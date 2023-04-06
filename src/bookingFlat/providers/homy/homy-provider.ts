@@ -25,7 +25,7 @@ export class HomyProvider implements Provider {
 
 
   public getById(id: string): Promise<Flat> {
-    console.log(id);
+    // console.log(id);
     return HttpHelper.fetchAsJson<HomyFlat>(HomyProvider.apiUrl + '/places/' +
       id)
       .then((response) => {
@@ -37,9 +37,9 @@ export class HomyProvider implements Provider {
 
   public async book(id: string, checkin: Date, checkout: Date) {
     const flat = await this.getById(id)
-    console.log('homy-provider => book', flat)
+    // console.log('homy-provider => book', flat)
     const originId = flat.originalId
-    return HttpHelper.fetchAsNumber<number>(
+    return HttpHelper.fetchAsNumber(
       HomyProvider.apiUrl + '/places/' +
       // создадим соответствующую строку запроса из объекта фильтра
       this.convertBookFilterToQueryString({
@@ -49,7 +49,7 @@ export class HomyProvider implements Provider {
       }), { method: 'PATCH' }
     )
       .then(response => {
-        console.log('homy-provider => book =>', response)
+        // console.log('homy-provider => book =>', response)
         return response
       })
 
@@ -66,7 +66,7 @@ export class HomyProvider implements Provider {
   private convertFilterToQueryString(filter: SearchFilter): string {
     let url = `checkInDate=${this.dateToUnixStamp(filter.checkin)}&` +
       `checkOutDate=${this.dateToUnixStamp(filter.checkout)}&` +
-      `coordinates=59.9386,30.3141`
+      'coordinates=59.9386,30.3141'
 
     if (filter.maxPrice != null) {
       url += `&maxPrice=${filter.maxPrice}`
@@ -75,7 +75,7 @@ export class HomyProvider implements Provider {
   }
 
   private convertBookFilterToQueryString(filter: BookFilter): string {
-    let url = `${filter.id}?` +
+    const url = `${filter.id}?` +
       `checkInDate=${this.dateToUnixStamp(filter.checkin)}&` +
       `checkOutDate=${this.dateToUnixStamp(filter.checkout)}&`
     return url

@@ -12,7 +12,6 @@ export class SDKProvider extends FlatRentSdk implements Provider {
   private static coordinatesSearchCity = [59.9386, 30.3141];
   // имя провайдера нужно, чтобы было возможно установить источник квартиры
   public static provider = 'sdk'
-  private static apiUrl = 'http://localhost:3040'
 
   public find(filter: SearchFilter): Promise<Flat[]> {
     const days = this.setPriceOneDay(filter.checkin, filter.checkout)
@@ -47,20 +46,6 @@ export class SDKProvider extends FlatRentSdk implements Provider {
         .catch(error => reject(error))
     })
   }
-  /**
-  * Данный провайдер не использует http коды для ответов
-  * В случае ошибки, она содержится в errorMessage
-  * Необходимо убедиться, что ответ не является ошибкой
-  */
-  // private assertIsValidResponse(error: Error): void {
-  //   if (error != null) {
-  //     throw new Error(error.message)
-  //   }
-  // }
-
-  // private dateToUnixStamp(date: Date): number {
-  //   return date.getTime()
-  // }
 
   /**
 * Проходимся по каждому объекту и конвертируем его в экземпляр Flat
@@ -74,18 +59,19 @@ export class SDKProvider extends FlatRentSdk implements Provider {
   * Здесь находится логика преобразования объекта книги из источника
   * в экземпляр Flat нашего приложения
   */
-  private convertFlatResponse(item: SDKFlat | Place, days?: number): Flat {
+  private convertFlatResponse(item: SDKFlat | Place, days = 1): Flat {
     const price = this.isPlace(item) ? item.price : item.totalPrice / days
     return new Flat(
       SDKProvider.provider,
       String(item.id),
-      item.photos[0],
-      item.title,
-      item.details,
+      item.photos[0] || '',
+      item.title || '',
+      item.details || '',
       price,
       this.setRemoteness(item.coordinates),
       item.bookedDates,
     )
+
   }
 
   /**
@@ -100,9 +86,18 @@ export class SDKProvider extends FlatRentSdk implements Provider {
    * Подсчет растояния по заданным координатам
    */
   private setRemoteness(cooordinate: number[]): number {
-    const x = SDKProvider.coordinatesSearchCity[0] - cooordinate[0];
-    const y = SDKProvider.coordinatesSearchCity[1] - cooordinate[1];
-    return Math.round(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) * 10) / 10
+    let x, y: number;
+    if (SDKProvider && cooordinate && SDKProvider.coordinatesSearchCity) {
+      if (SDKProvider.coordinatesSearchCity[0] && cooordinate[0]) {
+        x = SDKProvider.coordinatesSearchCity[0] - cooordinate[0]
+      } else x = 0
+      if (SDKProvider.coordinatesSearchCity[1] && cooordinate[1]) {
+        y = SDKProvider.coordinatesSearchCity[1] - cooordinate[1];
+      } else y = 0
+
+      return Math.round(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) * 10) / 10
+    }
+    else return 0
   }
 
   /**

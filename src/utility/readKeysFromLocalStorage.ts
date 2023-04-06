@@ -1,4 +1,4 @@
-import { User } from "../types";
+import { User } from '../types';
 
 export function getUserData(): User | undefined {
   const userData = localStorage.getItem('user');

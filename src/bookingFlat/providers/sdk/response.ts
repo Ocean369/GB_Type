@@ -1,10 +1,10 @@
 /**
 * Структура самой квартиры
 */
-import { PlaceForSearch, Place } from "../../../../modules/flat-rent-sdk.js";
+import { PlaceForSearch, Place } from '../../../../modules/flat-rent-sdk.js';
 
-export interface FlatResult extends PlaceForSearch { }
-export interface Flat extends Place { }
+export type FlatResult = PlaceForSearch
+export type Flat = Place
 
 
 

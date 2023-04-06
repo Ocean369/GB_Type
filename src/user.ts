@@ -2,7 +2,7 @@ import { renderBlock } from './lib.js'
 import { getFavoriteItems, getUserData } from './utility/readKeysFromLocalStorage.js';
 
 
-export function renderUserBlock(username?: string, url?: string) {
+export function renderUserBlock() {
 
   const user = getUserData();
   const favoritesItems = getFavoriteItems();
@@ -10,10 +10,10 @@ export function renderUserBlock(username?: string, url?: string) {
 
   const favoritesCaption = favoriteItemsAmount >= 1 ? favoriteItemsAmount.toString() : 'ничего нет'
   const hasFavoriteItems = favoriteItemsAmount >= 1 ? true : false
-
-  renderBlock(
-    'user-block',
-    `
+  if (user != undefined) {
+    renderBlock(
+      'user-block',
+      `
     <div class="header-container">
       <img class="avatar" src="/${user.avatarUrl}" alt="${user.username}" />
       <div class="info">
@@ -24,5 +24,6 @@ export function renderUserBlock(username?: string, url?: string) {
       </div>
     </div>
     `
-  )
+    )
+  }
 }
