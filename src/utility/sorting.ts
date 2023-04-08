@@ -1,14 +1,17 @@
-import { Flat } from "../bookingFlat/domain/flat"
+import { Flat } from '../bookingFlat/domain/flat'
 
-export function sorting(index: string, array: Array<Flat>): Array<Flat> {
+export function sorting(index: string, array: Array<Flat> = []): Array<Flat> {
   switch (index) {
-    case 'cheap':
-      return array.sort(sortByPriceCheapFirst)
-    case 'expensive':
-      return array.sort(sortByPriceExpensiveFirst)
-    case 'nearer':
-      return array.sort(sortByRemotenessNearerFirst)
+  case 'cheap':
+    return array.sort(sortByPriceCheapFirst)
+  case 'expensive':
+    return array.sort(sortByPriceExpensiveFirst)
+  case 'nearer':
+    return array.sort(sortByRemotenessNearerFirst)
+  default:
+    return array
   }
+
 }
 
 

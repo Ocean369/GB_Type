@@ -1,13 +1,8 @@
 
 import { Flat } from './bookingFlat/domain/flat.js';
-// import { FlatRentSdk } from './flat-rent-sdk.js';
 import { renderBlock } from './lib.js'
 import { getFavoriteItems } from './utility/readKeysFromLocalStorage.js'
-import { Place } from './types.js'
 
-function isPlace(object: any): object is Place {
-  return 'fooProperty' in object;
-}
 
 export function renderSearchStubBlock() {
   renderBlock(
@@ -70,7 +65,7 @@ export function renderPlaces(places: Flat[]): string {
   return placeFindBlocks
 }
 
-export function renderSearchResultsBlock(renderPlaces) {
+export function renderSearchResultsBlock(renderPlaces: string): void {
 
   renderBlock(
     'search-results-block',

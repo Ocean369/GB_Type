@@ -14,7 +14,7 @@ export abstract class HttpHelper {
       })
   }
 
-  public static fetchAsNumber<Response>(input: RequestInfo, init?: RequestInit): Promise<number> {
+  public static fetchAsNumber(input: RequestInfo, init?: RequestInit): Promise<number> {
     return fetch(input, init)
       .then(response => {
         if (response.status == 200) {

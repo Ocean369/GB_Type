@@ -14,7 +14,8 @@ window.addEventListener('DOMContentLoaded', () => {
     renderUserBlock()
   }
   renderSearchFormBlock()
-  document.getElementById('search-form').onsubmit = handleSearchFormSubmit;
+  const searchForm = document.getElementById('search-form') as HTMLFormElement
+  searchForm.addEventListener('submit', handleSearchFormSubmit);
   renderSearchStubBlock()
   // renderSearchResultsBlock()
   // renderToast(
