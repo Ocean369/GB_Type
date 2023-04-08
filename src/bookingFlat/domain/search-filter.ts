@@ -5,5 +5,5 @@ export interface SearchFilter {
   city: string,
   checkin: Date,
   checkout: Date,
-  maxPrice: number
+  maxPrice: number | undefined
 }

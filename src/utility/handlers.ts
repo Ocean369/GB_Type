@@ -118,7 +118,7 @@ export function handleSearchFormSubmit(event: Event) {
     city: formData.get('city') as string,
     checkin: new Date(formData.get('checkin') as string),
     checkout: new Date(formData.get('checkout') as string),
-    maxPrice: Number(formData.get('price')),
+    maxPrice: Number(formData.get('price')) || undefined,
   };
 
   Promise.all(ArrayForPromiseConstructor(providers, filter)).then((results) => {
